@@ -1,0 +1,19 @@
+{
+  "name": "project-generator",
+  "version": "1.0.0",
+  "description": "A command line tool to generate boilerplate for new coding projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esize/project-generator.git"
+  },
+  "author": "Evan Sizemore",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/esize/project-generator/issues"
+  },
+  "homepage": "https://github.com/esize/project-generator#readme"
+}
