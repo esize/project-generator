@@ -22,37 +22,38 @@ module.exports = async function() {
     chalk.yellow(
       figlet.textSync('Project', { horizontalLayout: 'full'})
     )
-  )
+  );
   
-  let settings;
 
   const run = async () => {
-    settings = new_inquirer.askCreationQuestions();
+    return new_inquirer.askCreationQuestions();
   };
-  run().then(() => {
+  run().then((settings) => {
     const projectName = settings.name;
     const template_types = fs.readdirSync(template_path);
     rmMacPresets(template_types);
     let subdirs = [];
-    
-    template_types.forEach(element => {
-      if(settings[element] !== "None"){
+
+    template_types.forEach((element) => {
+      if (settings[element] !== 'None') {
         subdirs.push({
           name: settings[element],
           proj_dir: element.toLowerCase(),
           template_dir: `${template_path}/${element}/${settings[element]}`
-        })
+        });
       }
-    })
-    let newProjDir = CURR_DIR;
+    });
     if(subdirs.length !== 0) {
-      fs.mkdirSync(`${CURR_DIR}/${projectName}`)
+      fs.mkdirSync(`${CURR_DIR}/${projectName}`);
+      subdirs.forEach(el => createSubdirs(el))
     } else {
-      err.push("You must select at least 1 project template")
+      console.error(
+        chalk.red(
+          "You must select at least 1 project template"
+        )
+      );
     }
 
-    subdirs.forEach(el => createSubdirs(el))
-      
 
     function createSubdirs(el) {
       if(subdirs.length > 1) {
@@ -88,22 +89,7 @@ module.exports = async function() {
         }
       })
     }
-    if(err.length > 0){
-      err.forEach(error => {
-        console.log(
-          chalk.red(error)
-        )
-      })
-    } else {
-      console.log(
-        chalk.green("All done!")
-      )
-    }
-  })
-  
 
-
-
-
-
+  });
+    
 };
