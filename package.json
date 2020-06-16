@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/esize/project-generator/issues"
   },
-  "homepage": "https://github.com/esize/project-generator#readme"
+  "homepage": "https://github.com/esize/project-generator#readme",
+  "bin": {
+    "project": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "clear": "^0.1.0",
+    "commander": "^5.1.0",
+    "figlet": "^1.4.0",
+    "inquirer": "^7.1.0"
+  }
 }
