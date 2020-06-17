@@ -22,8 +22,8 @@ NOTE: Project name will be project_name and description will be default_descript
     * [x] Express
 * [x] Don't create a subfolder if only one template is selected
 * [x] Check if starting directory is empty
-* [ ] Pass in project name in command
-* [ ] Change boilerplate variables with the project name, description, and license
+* [x] Pass in project name in command
+* [x] Change boilerplate variables with the project name, description, and license
 * [ ] Put it on GitHub
   * [ ] Create a new repository based on the project name, description, and license
   * [ ] Git add .

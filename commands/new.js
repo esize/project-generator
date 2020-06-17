@@ -15,7 +15,7 @@ const template_path = path.join(__dirname, '../templates')
 
 const CURR_DIR = process.cwd();
 
-module.exports = async function() {
+module.exports = async function(title) {
   clear();
 
   console.log(
@@ -26,9 +26,13 @@ module.exports = async function() {
   
 
   const run = async () => {
-    return new_inquirer.askCreationQuestions();
+    return new_inquirer.askCreationQuestions(title);
   };
   run().then((settings) => {
+    if(title) {
+      settings.name = title;
+    }
+
     const projectName = settings.name;
     const template_types = fs.readdirSync(template_path);
     rmMacPresets(template_types);
@@ -53,8 +57,7 @@ module.exports = async function() {
       } else {
         WORKING_DIR = CURR_DIR;
       }
-      console.log(WORKING_DIR);
-      subdirs.forEach(el => createSubdirs(el, WORKING_DIR))
+      subdirs.forEach(el => createSubdirs(el, WORKING_DIR, settings))
       status.stop();
     } else {
       console.error(
@@ -64,25 +67,28 @@ module.exports = async function() {
       );
     }
 
-    function createSubdirs(el, WORKING_DIR) {
+    function createSubdirs(el, WORKING_DIR, settings) {
       if(subdirs.length > 1) {
         fs.mkdirSync(`${WORKING_DIR}/${el.proj_dir}`)
-        createDirectoryContents(el.template_dir, `${el.proj_dir}`, WORKING_DIR)
+        createDirectoryContents(el.template_dir, `${el.proj_dir}`, WORKING_DIR, settings)
       } else{
-        console.log("you found it");
-        createDirectoryContents(el.template_dir, '', WORKING_DIR)
+        createDirectoryContents(el.template_dir, '', WORKING_DIR, settings)
       }
     }
 
-    async function createDirectoryContents(template_path, newProjectPath, WORKING_DIR) {
+    async function createDirectoryContents(template_path, newProjectPath, WORKING_DIR, settings) {
       const filesToCreate = fs.readdirSync(template_path);
 
       filesToCreate.forEach(async file => {
+        console.log(settings.name);
         const origFilePath = `${template_path}/${file}`;
         const stats = fs.statSync(origFilePath);
 
         if(stats.isFile()) {
           const contents = fs.readFileSync(origFilePath, 'utf8');
+          
+          let replacement = contents.replace(/project_name/g, settings.name);
+          replacement = replacement.replace(/default_description/g, settings.description);
 
           // NPM is stupid sometimes
           if (file === '.npmignore') file = '.gitignore';
@@ -92,11 +98,11 @@ module.exports = async function() {
           } else {
             writePath = `${WORKING_DIR}/${file}`;
           }
-          fs.writeFileSync(writePath, contents, 'utf8');
+          fs.writeFileSync(writePath, replacement, 'utf8');
 
         } else if(stats.isDirectory()){
           fs.mkdirSync(`${WORKING_DIR}/${newProjectPath}/${file}`);
-          createDirectoryContents(`${template_path}/${file}`, `${newProjectPath}/${file}`, WORKING_DIR)
+          createDirectoryContents(`${template_path}/${file}`, `${newProjectPath}/${file}`, WORKING_DIR, settings)
         }
       })
     }

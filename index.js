@@ -7,11 +7,11 @@ const command_new = require('./commands/new');
 const command_init = require('./commands/init');
 
 program
-  .command('new')
+  .command('new [title]')
   .alias('n')
   .description("Create a new project and generate it's boilerplate")
-  .action(function() {
-    command_new();
+  .action(function(title) {
+    command_new(title);
   });
 
 program
