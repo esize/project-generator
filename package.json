@@ -24,7 +24,10 @@
     "clear": "^0.1.0",
     "clui": "^0.3.6",
     "commander": "^5.1.0",
+    "configstore": "^5.0.1",
     "figlet": "^1.4.0",
-    "inquirer": "^7.1.0"
+    "inquirer": "^7.1.0",
+    "open": "^7.0.4",
+    "simple-git": "^2.7.0"
   }
 }

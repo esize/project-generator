@@ -24,11 +24,15 @@ NOTE: Project name will be project_name and description will be default_descript
 * [x] Check if starting directory is empty
 * [x] Pass in project name in command
 * [x] Change boilerplate variables with the project name, description, and license
-* [ ] Put it on GitHub
-  * [ ] Create a new repository based on the project name, description, and license
-  * [ ] Git add .
-  * [ ] Commit with the message "initial commit"
-  * [ ] Push to the new repository
+* [x] Put it on GitHub
+  * [x] Login to GitHub
+    * [x] Sign up for an oauth app
+    * [x] Login the user on init
+    * [x] Store the token in config
+  * [x] Create a new repository based on the project name, description, and license
+  * [x] Git add .
+  * [x] Commit with the message "initial commit"
+  * [x] Push to the new repository
 * [ ] Create a .project-settings file to contain settings choosen on initialization
 * [ ] Create a READ.md file and auto-populate with instructions from the various templates
 * [ ] Use the firebase api to add firebase as a backend type

@@ -1,7 +1,7 @@
+const github = require('../lib/github');
 
-
-module.exports = function() {
-  
-  console.log("this would let you setup the project cli")
-
+module.exports = function () {
+  console.log("Logging you into GitHub...");
+  github.getOauth();
+  // github.createRepo();
 };
