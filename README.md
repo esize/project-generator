@@ -46,9 +46,9 @@ NOTE: Project name will be project_name and description will be default_descript
    * [ ] Vue
    * [ ] HTML
  * [ ] Basic Auth Configuration
-  * [ ] OAuth
-  * [ ] JWT
-  * [ ] Cookies/Sessions
+   * [ ] OAuth
+   * [ ] JWT
+   * [ ] Cookies/Sessions
 * [ ] Determine weather commented modifier sections should be included based on settings
 * [ ] Use the init script to setup the cli on a new computer
   * [ ] Login to GitHub
